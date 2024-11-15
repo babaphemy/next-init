@@ -1,0 +1,35 @@
+name: Run Cypress E2E Tests
+
+on:
+  pull_request:
+    branches:
+      - master
+      - feature/landing
+
+jobs:
+  cypress-e2e-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          start: npm run dev
+          wait-on: "http://localhost:3000" # Ensures server is running
+
+      - name: Archive test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-results
+          path: cypress/screenshots
