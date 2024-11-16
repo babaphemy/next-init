@@ -4,7 +4,7 @@ import Gmap from '../components/contact/Gmap';
 
 const ContactPage: React.FC = () => {
   return (
-    <Container>
+    <Container maxWidth="lg">
       <Grid2 container spacing={2}>
         <Grid2 size={8}>
           <Gmap />

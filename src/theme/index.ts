@@ -22,7 +22,6 @@ declare module '@mui/material/styles' {
   }
 }
 
-// Define the theme options with proper typing
 const themeOptions: ThemeOptions = {
   palette: {
     text: {
