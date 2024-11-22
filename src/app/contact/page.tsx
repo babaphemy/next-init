@@ -1,4 +1,4 @@
-import { Box, Container, Grid2 } from '@mui/material';
+import { Container, Grid2 } from '@mui/material';
 import ContactForm from '../components/contact/ContactForm';
 import Gmap from '../components/contact/Gmap';
 

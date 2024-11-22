@@ -1,4 +1,4 @@
-import { Box, Chip, Grid2, Stack, Typography } from '@mui/material';
+import { Box, Chip, Stack, Typography } from '@mui/material';
 import { PinDrop, Phone, Email } from '@mui/icons-material';
 import { AppData } from '@/app/data';
 

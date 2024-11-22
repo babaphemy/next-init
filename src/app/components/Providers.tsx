@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import Ga from './Analytics/Google/Ga';
 
 interface ProvidersProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: any;
 }
 const mantimeTheme = createTheme({

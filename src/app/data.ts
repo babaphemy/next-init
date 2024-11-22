@@ -34,5 +34,19 @@ const AppData = {
     message2:
       'We are dedicated to making high-quality learning accessible to all, regardless of their background or location.',
   },
+  nav: [
+    {
+      name: 'Home',
+      link: '/',
+    },
+    {
+      name: 'About',
+      link: '/about',
+    },
+    {
+      name: 'Contact',
+      link: '/contact',
+    },
+  ],
 };
 export { AppData };

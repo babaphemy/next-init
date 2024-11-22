@@ -25,11 +25,13 @@ const Header = () => (
               passHref
             ></Link>
           )}
-          <Link href={'/contact'} passHref>
-            <Button variant="text" sx={{ color: 'primary.main' }}>
-              Contact Us
-            </Button>
-          </Link>
+          {AppData?.nav.map((item, index) => (
+            <Link key={item.name + index} href={item.link} passHref>
+              <Button variant="text" sx={{ color: 'primary.main' }}>
+                {item.name}
+              </Button>
+            </Link>
+          ))}
         </Box>
       </Box>
     </Container>
