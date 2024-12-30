@@ -1,18 +1,21 @@
-import { Container, Grid2 } from '@mui/material';
+'use client';
+import { Container, Grid2 as Grid } from '@mui/material';
 import ContactForm from '../components/contact/ContactForm';
 import Gmap from '../components/contact/Gmap';
 
 const ContactPage: React.FC = () => {
+  const handleDirections = () => {
+    window.open(
+      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(AppData.address)}`,
+    );
+  };
+
   return (
-    <Container maxWidth="lg">
-      <Grid2 container spacing={2}>
-        <Grid2 size={8}>
-          <Gmap />
-        </Grid2>
-        <Grid2 size={4}>
-          <ContactForm />
-        </Grid2>
-      </Grid2>
+    <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Grid container spacing={4}>
+        <ContactForm handleDirections={handleDirections} />
+        <Gmap handleDirections={handleDirections} />
+      </Grid>
     </Container>
   );
 };

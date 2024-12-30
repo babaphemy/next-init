@@ -1,192 +1,224 @@
 'use client';
-import React, { useRef, FC } from 'react';
-import { Box, Button, Grid2, TextField, Typography } from '@mui/material';
+import React, { FC } from 'react';
+import {
+  Box,
+  Button,
+  Chip,
+  Divider,
+  Grid2 as Grid,
+  IconButton,
+  Paper,
+  Typography,
+  Tooltip,
+} from '@mui/material';
+import {
+  LocationOn,
+  Phone,
+  Email,
+  Navigation,
+  Facebook,
+  Twitter,
+  LinkedIn,
+  Instagram,
+  WhatsApp,
+  AccessTime,
+} from '@mui/icons-material';
 import { AppData } from '@/app/data';
 
-const ContactForm: FC = () => {
-  const formRef = useRef<HTMLFormElement>(null);
-  const handleSubmit = () => {};
+interface ContactFormProps {
+  handleDirections: () => void;
+}
+
+const ContactForm: FC<ContactFormProps> = ({ handleDirections }) => {
   return (
-    <Box
-      component="main"
-      sx={{
-        flexGrow: 1,
-        maxWidth: '510px',
-        ml: 'auto',
-        mr: 'auto',
-        padding: '50px 0 100px',
-      }}
-    >
-      <Grid2 container spacing={2}>
-        <Box>
-          <Typography variant="h1" fontSize="28px" fontWeight="700" mb="5px">
-            Contact Us
-          </Typography>
+    <Grid size={{ xs: 12, md: 4 }}>
+      <Paper
+        elevation={3}
+        sx={{
+          p: 3,
+          borderRadius: 4,
+          bgcolor: 'background.paper',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-5px)',
+            boxShadow: (theme) => `0 8px 30px ${theme.palette.primary.main}20`,
+          },
+        }}
+      >
+        <Typography
+          variant="h4"
+          gutterBottom
+          sx={{
+            color: 'primary.main',
+            fontWeight: 'bold',
+            mb: 3,
+            borderBottom: '2px solid',
+            borderColor: 'primary.main',
+            pb: 1,
+          }}
+        >
+          Contact Us
+        </Typography>
 
-          <Typography fontSize="14px" mb="30px">
-            {AppData.contactForm.message}
-          </Typography>
+        {/* Business Hours */}
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+          <AccessTime sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
+          <Box>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Opearting Hours
+            </Typography>
+            <Typography color="text.hint" sx={{ mt: 0.5 }}>
+              {AppData.operatingHours}
+            </Typography>
+          </Box>
+        </Box>
 
-          <Box
-            ref={formRef}
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-          >
-            <Box
-              sx={{
-                background: '#fff',
-                padding: '30px 20px',
-                borderRadius: '10px',
-                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-              }}
-              className="bg-black"
-            >
-              <Grid2 container alignItems="center" spacing={2}>
-                <Grid2 size={12}>
-                  <Typography
-                    component="label"
-                    sx={{
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      mb: '10px',
-                      display: 'block',
-                    }}
-                  >
-                    Name
-                  </Typography>
-                  <TextField
-                    autoComplete="name"
-                    name="name"
-                    fullWidth
-                    id="name"
-                    autoFocus
-                    InputProps={{
-                      style: { borderRadius: 8 },
-                    }}
-                  />
-                </Grid2>
+        <Divider sx={{ my: 3 }} />
 
-                <Grid2 size={12}>
-                  <Typography
-                    component="label"
-                    sx={{
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      mb: '10px',
-                      display: 'block',
-                    }}
-                  >
-                    Email
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    id="email"
-                    name="email"
-                    autoComplete="email"
-                    InputProps={{
-                      style: { borderRadius: 8 },
-                    }}
-                  />
-                </Grid2>
-
-                <Grid2 size={12}>
-                  <Typography
-                    component="label"
-                    sx={{
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      mb: '10px',
-                      display: 'block',
-                    }}
-                  >
-                    Phone Number
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    id="phone"
-                    name="phone"
-                    autoComplete="phone"
-                    InputProps={{
-                      style: { borderRadius: 8 },
-                    }}
-                  />
-                </Grid2>
-
-                <Grid2 size={12}>
-                  <Typography
-                    component="label"
-                    sx={{
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      mb: '10px',
-                      display: 'block',
-                    }}
-                  >
-                    Subject
-                  </Typography>
-                  <TextField
-                    fullWidth
-                    id="subject"
-                    name="subject"
-                    autoComplete="subject"
-                    InputProps={{
-                      style: { borderRadius: 8 },
-                    }}
-                  />
-                </Grid2>
-
-                <Grid2 size={12}>
-                  <Typography
-                    component="label"
-                    sx={{
-                      fontWeight: '500',
-                      fontSize: '14px',
-                      mb: '10px',
-                      display: 'block',
-                    }}
-                  >
-                    Message
-                  </Typography>
-
-                  <TextField
-                    id="message"
-                    name="message"
-                    multiline
-                    maxRows={4}
-                    minRows={5}
-                    style={{
-                      width: '100%',
-                      background: '#FFFFFF',
-                      color: '#5B5B98',
-                      padding: '16.5px 14px',
-                    }}
-                    className="dark-textarea"
-                  />
-                </Grid2>
-              </Grid2>
-            </Box>
-
+        {/* Address Section */}
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+          <LocationOn sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
+          <Box>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Our Location
+            </Typography>
+            <Typography color="text.hint" sx={{ mt: 0.5 }}>
+              {AppData.address}
+            </Typography>
             <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{
-                mt: 3,
-                textTransform: 'capitalize',
-                borderRadius: '8px',
-                fontWeight: '500',
-                fontSize: '15px',
-                padding: '12px 10px',
-                color: '#fff !important',
-              }}
+              startIcon={<Navigation />}
+              variant="outlined"
+              size="small"
+              onClick={handleDirections}
+              sx={{ mt: 1 }}
             >
-              Send Message
+              Get Directions
             </Button>
           </Box>
         </Box>
-      </Grid2>
-    </Box>
+
+        {/* Phone Section */}
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+          <Phone sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
+          <Box>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Phone Numbers
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
+              {AppData.phone.map((phone) => (
+                <Tooltip title="Click to call" arrow key={phone}>
+                  <Chip
+                    label={phone}
+                    color="primary"
+                    variant="outlined"
+                    clickable
+                    onClick={() =>
+                      window.open(`tel:${phone.replace(/\s/g, '')}`)
+                    }
+                    icon={<WhatsApp />}
+                    sx={{
+                      '&:hover': {
+                        transform: 'scale(1.05)',
+                        bgcolor: 'primary.main',
+                        color: 'white',
+                      },
+                      transition: 'all 0.2s',
+                    }}
+                  />
+                </Tooltip>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Email Section */}
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
+          <Email sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
+          <Box>
+            <Typography variant="subtitle1" fontWeight="bold">
+              Email Addresses
+            </Typography>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
+              {AppData.adminEmail.map((email) => (
+                <Tooltip title="Click to send email" arrow key={email}>
+                  <Chip
+                    label={email}
+                    color="primary"
+                    variant="outlined"
+                    clickable
+                    onClick={() => window.open(`mailto:${email}`)}
+                    sx={{
+                      '&:hover': {
+                        transform: 'scale(1.05)',
+                        bgcolor: 'primary.main',
+                        color: 'white',
+                      },
+                      transition: 'all 0.2s',
+                    }}
+                  />
+                </Tooltip>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Social Media Section */}
+        <Divider sx={{ my: 3 }} />
+        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+          Follow Us
+        </Typography>
+        <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
+          <Tooltip title="Facebook" arrow>
+            <IconButton
+              color="primary"
+              onClick={() => window.open(AppData.socialMedia.facebook)}
+              sx={{
+                '&:hover': { transform: 'translateY(-3px)' },
+                transition: 'transform 0.2s',
+              }}
+            >
+              <Facebook />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Twitter" arrow>
+            <IconButton
+              color="primary"
+              onClick={() => window.open(AppData.socialMedia.twitter)}
+              sx={{
+                '&:hover': { transform: 'translateY(-3px)' },
+                transition: 'transform 0.2s',
+              }}
+            >
+              <Twitter />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="LinkedIn" arrow>
+            <IconButton
+              color="primary"
+              onClick={() => window.open(AppData.socialMedia.linkedin)}
+              sx={{
+                '&:hover': { transform: 'translateY(-3px)' },
+                transition: 'transform 0.2s',
+              }}
+            >
+              <LinkedIn />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Instagram" arrow>
+            <IconButton
+              color="primary"
+              onClick={() => window.open(AppData.socialMedia.instagram)}
+              sx={{
+                '&:hover': { transform: 'translateY(-3px)' },
+                transition: 'transform 0.2s',
+              }}
+            >
+              <Instagram />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </Paper>
+    </Grid>
   );
 };
 export default ContactForm;
