@@ -2,6 +2,7 @@
 import { Container, Grid2 as Grid } from '@mui/material';
 import ContactForm from '../components/contact/ContactForm';
 import Gmap from '../components/contact/Gmap';
+import { AppData } from '../data';
 
 const ContactPage: React.FC = () => {
   const handleDirections = () => {
