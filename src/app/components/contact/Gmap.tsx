@@ -1,76 +1,91 @@
-import { Box, Grid2 as Grid, IconButton, Paper, Tooltip } from '@mui/material';
-import { OpenInNew, Navigation } from '@mui/icons-material';
+import React from 'react';
+import { MapPin, Phone, Mail, ExternalLink } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { AppData } from '@/app/data';
-interface MapProps {
-  handleDirections: () => void;
-}
-const Gmap: React.FC<MapProps> = ({ handleDirections }) => {
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: AppData.name,
-        text: `Visit us at ${AppData.address}`,
-        url: window.location.href,
-      });
-    }
-  };
+
+const Gmap = () => {
   return (
-    <Grid size={{ xs: 12, md: 8 }}>
-      <Paper
-        elevation={3}
-        sx={{
-          position: 'relative',
-          height: 600,
-          overflow: 'hidden',
-          borderRadius: 4,
-          transition: 'all 0.3s ease-in-out',
-          '&:hover': {
-            boxShadow: (theme) => `0 8px 30px ${theme.palette.primary.main}20`,
-          },
-        }}
-      >
+    <div className="space-y-8 mt-8">
+      <Card className="overflow-hidden shadow-lg border-none">
+        <CardHeader className="bg-primary/5 border-b">
+          <CardTitle className="text-2xl font-bold">Visit Us</CardTitle>
+        </CardHeader>
+        <CardContent className="p-6">
+          {/* Address Section */}
+          <div className="space-y-6">
+            <div className="flex items-start gap-3 group">
+              <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200">
+                <MapPin className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-lg mb-1">Address</h4>
+                <p className="text-muted-foreground">{AppData.address}</p>
+                <Button variant="link" className="p-0 h-auto mt-2 text-primary">
+                  Get Directions
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Phone Numbers Section */}
+            <div className="flex items-start gap-3 group">
+              <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200">
+                <Phone className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-lg mb-2">Phone</h4>
+                <div className="flex flex-wrap gap-2">
+                  {AppData.phone.map((phone) => (
+                    <Badge
+                      key={phone}
+                      variant="secondary"
+                      className="px-3 py-1.5 text-sm transition-colors duration-200 hover:bg-primary hover:text-primary-foreground cursor-pointer"
+                    >
+                      {phone}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Email Section */}
+            <div className="flex items-start gap-3 group">
+              <div className="p-2 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200">
+                <Mail className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-lg mb-2">Email</h4>
+                <div className="flex flex-wrap gap-2">
+                  {AppData.adminEmail.map((email) => (
+                    <Badge
+                      key={email}
+                      variant="outline"
+                      className="px-3 py-1.5 text-sm border-primary/20 text-primary hover:bg-primary hover:text-primary-foreground cursor-pointer transition-colors duration-200"
+                    >
+                      {email}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Map Card */}
+      <Card className="overflow-hidden shadow-lg border-none">
         <iframe
           src={AppData.googleMap}
-          style={{
-            border: 'none',
-            width: '100%',
-            height: '100%',
-          }}
+          className="w-full h-[400px] border-0"
           allowFullScreen={true}
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="Location Map"
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            top: 16,
-            right: 16,
-            display: 'flex',
-            gap: 1,
-          }}
-        >
-          <Tooltip title="Share Location" arrow>
-            <Paper elevation={2} sx={{ borderRadius: 1 }}>
-              <IconButton color="primary" onClick={handleShare} size="small">
-                <Navigation />
-              </IconButton>
-            </Paper>
-          </Tooltip>
-          <Tooltip title="Open in Google Maps" arrow>
-            <Paper elevation={2} sx={{ borderRadius: 1 }}>
-              <IconButton
-                color="primary"
-                onClick={handleDirections}
-                size="small"
-              >
-                <OpenInNew />
-              </IconButton>
-            </Paper>
-          </Tooltip>
-        </Box>
-      </Paper>
-    </Grid>
+        ></iframe>
+      </Card>
+    </div>
   );
 };
+
 export default Gmap;

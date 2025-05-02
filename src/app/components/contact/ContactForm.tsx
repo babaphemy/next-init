@@ -1,224 +1,117 @@
 'use client';
-import React, { FC } from 'react';
-import {
-  Box,
-  Button,
-  Chip,
-  Divider,
-  Grid2 as Grid,
-  IconButton,
-  Paper,
-  Typography,
-  Tooltip,
-} from '@mui/material';
-import {
-  LocationOn,
-  Phone,
-  Email,
-  Navigation,
-  Facebook,
-  Twitter,
-  LinkedIn,
-  Instagram,
-  WhatsApp,
-  AccessTime,
-} from '@mui/icons-material';
+
+import React, { useRef } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { AppData } from '@/app/data';
+import { Send } from 'lucide-react';
 
-interface ContactFormProps {
-  handleDirections: () => void;
-}
+const ContactForm = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const handleSubmit = () => {};
 
-const ContactForm: FC<ContactFormProps> = ({ handleDirections }) => {
   return (
-    <Grid size={{ xs: 12, md: 4 }}>
-      <Paper
-        elevation={3}
-        sx={{
-          p: 3,
-          borderRadius: 4,
-          bgcolor: 'background.paper',
-          transition: 'all 0.3s ease-in-out',
-          '&:hover': {
-            transform: 'translateY(-5px)',
-            boxShadow: (theme) => `0 8px 30px ${theme.palette.primary.main}20`,
-          },
-        }}
-      >
-        <Typography
-          variant="h4"
-          gutterBottom
-          sx={{
-            color: 'primary.main',
-            fontWeight: 'bold',
-            mb: 3,
-            borderBottom: '2px solid',
-            borderColor: 'primary.main',
-            pb: 1,
-          }}
-        >
-          Contact Us
-        </Typography>
+    <main className="flex-grow max-w-lg mx-auto py-12">
+      <Card className="overflow-hidden border-none shadow-lg">
+        <CardHeader className="bg-primary text-primary-foreground pb-8">
+          <CardTitle className="text-2xl font-bold text-center">
+            Contact Us
+          </CardTitle>
+          <p className="text-sm text-primary-foreground/80 text-center mt-2">
+            {AppData.contactForm.message}
+          </p>
+        </CardHeader>
 
-        {/* Business Hours */}
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-          <AccessTime sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
-          <Box>
-            <Typography variant="subtitle1" fontWeight="bold">
-              Opearting Hours
-            </Typography>
-            <Typography color="text.hint" sx={{ mt: 0.5 }}>
-              {AppData.operatingHours}
-            </Typography>
-          </Box>
-        </Box>
+        <CardContent className="p-8 -mt-4 bg-background rounded-t-xl relative">
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            noValidate
+            className="space-y-6"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-sm font-medium">
+                  Name
+                </Label>
+                <Input
+                  id="name"
+                  name="name"
+                  autoComplete="name"
+                  autoFocus
+                  className="rounded-lg transition-shadow duration-200 focus:shadow-md"
+                  placeholder="John Doe"
+                />
+              </div>
 
-        <Divider sx={{ my: 3 }} />
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  className="rounded-lg transition-shadow duration-200 focus:shadow-md"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
 
-        {/* Address Section */}
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-          <LocationOn sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
-          <Box>
-            <Typography variant="subtitle1" fontWeight="bold">
-              Our Location
-            </Typography>
-            <Typography color="text.hint" sx={{ mt: 0.5 }}>
-              {AppData.address}
-            </Typography>
+            <div className="space-y-2">
+              <Label htmlFor="phone" className="text-sm font-medium">
+                Phone Number
+              </Label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                className="rounded-lg transition-shadow duration-200 focus:shadow-md"
+                placeholder="(123) 456-7890"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="subject" className="text-sm font-medium">
+                Subject
+              </Label>
+              <Input
+                id="subject"
+                name="subject"
+                className="rounded-lg transition-shadow duration-200 focus:shadow-md"
+                placeholder="How can we help?"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="message" className="text-sm font-medium">
+                Message
+              </Label>
+              <Textarea
+                id="message"
+                name="message"
+                className="min-h-[120px] rounded-lg resize-none transition-shadow duration-200 focus:shadow-md"
+                placeholder="Tell us more about your inquiry..."
+              />
+            </div>
+
             <Button
-              startIcon={<Navigation />}
-              variant="outlined"
-              size="small"
-              onClick={handleDirections}
-              sx={{ mt: 1 }}
+              type="submit"
+              className="w-full rounded-lg py-6 text-base font-medium transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
             >
-              Get Directions
+              Send Message
+              <Send className="w-4 h-4" />
             </Button>
-          </Box>
-        </Box>
-
-        {/* Phone Section */}
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-          <Phone sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
-          <Box>
-            <Typography variant="subtitle1" fontWeight="bold">
-              Phone Numbers
-            </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
-              {AppData.phone.map((phone) => (
-                <Tooltip title="Click to call" arrow key={phone}>
-                  <Chip
-                    label={phone}
-                    color="primary"
-                    variant="outlined"
-                    clickable
-                    onClick={() =>
-                      window.open(`tel:${phone.replace(/\s/g, '')}`)
-                    }
-                    icon={<WhatsApp />}
-                    sx={{
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                        bgcolor: 'primary.main',
-                        color: 'white',
-                      },
-                      transition: 'all 0.2s',
-                    }}
-                  />
-                </Tooltip>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-
-        {/* Email Section */}
-        <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-          <Email sx={{ color: 'primary.main', mr: 2, fontSize: 28 }} />
-          <Box>
-            <Typography variant="subtitle1" fontWeight="bold">
-              Email Addresses
-            </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mt: 1 }}>
-              {AppData.adminEmail.map((email) => (
-                <Tooltip title="Click to send email" arrow key={email}>
-                  <Chip
-                    label={email}
-                    color="primary"
-                    variant="outlined"
-                    clickable
-                    onClick={() => window.open(`mailto:${email}`)}
-                    sx={{
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                        bgcolor: 'primary.main',
-                        color: 'white',
-                      },
-                      transition: 'all 0.2s',
-                    }}
-                  />
-                </Tooltip>
-              ))}
-            </Box>
-          </Box>
-        </Box>
-
-        {/* Social Media Section */}
-        <Divider sx={{ my: 3 }} />
-        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-          Follow Us
-        </Typography>
-        <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center' }}>
-          <Tooltip title="Facebook" arrow>
-            <IconButton
-              color="primary"
-              onClick={() => window.open(AppData.socialMedia.facebook)}
-              sx={{
-                '&:hover': { transform: 'translateY(-3px)' },
-                transition: 'transform 0.2s',
-              }}
-            >
-              <Facebook />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Twitter" arrow>
-            <IconButton
-              color="primary"
-              onClick={() => window.open(AppData.socialMedia.twitter)}
-              sx={{
-                '&:hover': { transform: 'translateY(-3px)' },
-                transition: 'transform 0.2s',
-              }}
-            >
-              <Twitter />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="LinkedIn" arrow>
-            <IconButton
-              color="primary"
-              onClick={() => window.open(AppData.socialMedia.linkedin)}
-              sx={{
-                '&:hover': { transform: 'translateY(-3px)' },
-                transition: 'transform 0.2s',
-              }}
-            >
-              <LinkedIn />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Instagram" arrow>
-            <IconButton
-              color="primary"
-              onClick={() => window.open(AppData.socialMedia.instagram)}
-              sx={{
-                '&:hover': { transform: 'translateY(-3px)' },
-                transition: 'transform 0.2s',
-              }}
-            >
-              <Instagram />
-            </IconButton>
-          </Tooltip>
-        </Box>
-      </Paper>
-    </Grid>
+          </form>
+        </CardContent>
+      </Card>
+    </main>
   );
 };
+
 export default ContactForm;

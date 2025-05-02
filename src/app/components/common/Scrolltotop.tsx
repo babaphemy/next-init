@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Box, IconButton } from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import { Button } from '@/components/ui/button';
+import { ArrowUp } from 'lucide-react';
 
 interface ScrollToTopProps {
   threshold?: number;
@@ -36,34 +36,20 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ threshold = 100 }) => {
     });
   };
 
+  if (!showScroll) return null;
+
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        bottom: '20px',
-        right: '20px',
-        zIndex: 1000,
-        transition: 'opacity 0.3s',
-        opacity: showScroll ? 1 : 0,
-        pointerEvents: showScroll ? 'auto' : 'none',
-      }}
-    >
-      <IconButton
+    <div className="fixed bottom-6 right-6 z-50">
+      <Button
         onClick={scrollTop}
-        color="primary"
-        aria-label="scroll to top"
-        sx={{
-          backgroundColor: 'background.paper',
-          boxShadow: 2,
-          '&:hover': {
-            backgroundColor: 'background.paper',
-            opacity: 0.8,
-          },
-        }}
+        size="icon"
+        variant="secondary"
+        className="h-10 w-10 rounded-full shadow-lg bg-background hover:bg-background hover:scale-110 transition-all duration-300 animate-in fade-in slide-in-from-bottom-8"
+        aria-label="Scroll to top"
       >
-        <ArrowUpwardIcon />
-      </IconButton>
-    </Box>
+        <ArrowUp className="h-5 w-5" />
+      </Button>
+    </div>
   );
 };
 

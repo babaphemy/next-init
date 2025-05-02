@@ -23,5 +23,5 @@ Set the theme colors from `src/theme/index.ts`
 React18
 NextJS
 Cypress
-MUI5
+SHACDN
 react-toastify
