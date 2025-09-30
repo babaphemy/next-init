@@ -52,10 +52,10 @@ export interface AppDataType {
 export interface EnrollmentFormProps {
   formik: FormikProps<FormikValues>;
   handleUpload: (
-    acceptedFiles: File[],
-    type: 'photo' | 'birthCert' | 'signature',
+    _acceptedFiles: File[],
+    _type: 'photo' | 'birthCert' | 'signature',
   ) => Promise<string | undefined>;
-  handleDelete: (type: keyof UploadType) => void;
+  handleDelete: (_type: keyof UploadType) => void;
   uploadType: UploadType;
   isUploading: boolean;
   user: AppUser;
@@ -116,8 +116,8 @@ export interface StudentFormValues {
 
 export interface FormSectionProps {
   title: string;
-  icon: React.ReactNode;
-  children: React.ReactNode;
+  icon: ReactNode;
+  children: ReactNode;
 }
 
 export interface StudentFormFieldProps {
@@ -125,5 +125,5 @@ export interface StudentFormFieldProps {
   error?: string;
   touched?: boolean;
   required?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }

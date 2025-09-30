@@ -1,8 +1,9 @@
 'use client';
-import ContactForm from '../components/contact/ContactForm';
-import Gmap from '../components/contact/Gmap';
+import { FC } from 'react';
+import ContactForm from '../../components/contact/ContactForm';
+import Gmap from '../../components/contact/Gmap';
 
-const ContactPage: React.FC = () => {
+const ContactPage: FC = () => {
   // const handleDirections = () => {
   //   window.open(
   //     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(AppData.address)}`,

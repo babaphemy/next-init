@@ -5,6 +5,7 @@ import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Providers from './components/Providers';
 import ScrollToTop from './components/common/Scrolltotop';
+import { ReactNode } from 'react';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -20,7 +21,7 @@ const geistMono = localFont({
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
