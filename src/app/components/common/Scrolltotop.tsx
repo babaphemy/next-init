@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, FC } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowUp } from 'lucide-react';
 
@@ -6,7 +6,7 @@ interface ScrollToTopProps {
   threshold?: number;
 }
 
-const ScrollToTop: React.FC<ScrollToTopProps> = ({ threshold = 100 }) => {
+const ScrollToTop: FC<ScrollToTopProps> = ({ threshold = 100 }) => {
   const [showScroll, setShowScroll] = useState<boolean>(false);
 
   const checkScrollTop = useCallback(() => {

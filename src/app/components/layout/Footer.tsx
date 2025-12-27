@@ -1,7 +1,8 @@
 import { AppData } from '@/app/data';
 import { Phone } from 'lucide-react';
 import Image from 'next/image';
-const Footer: React.FC = () => {
+import { FC } from 'react';
+const Footer: FC = () => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="border-t bg-muted/50">
