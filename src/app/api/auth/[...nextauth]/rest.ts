@@ -1,7 +1,6 @@
-import { Uploader } from '@/app/types';
 import { horacePath, PostSettings } from '@/lib/setting';
 
-export const getPresignedUrl = async (uploader: Uploader) => {
+export const getPresignedUrl = async (uploader: { file: string }) => {
   const resp = await fetch(
     `${horacePath}info/s3/presigned`,
     PostSettings(uploader),

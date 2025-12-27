@@ -141,19 +141,19 @@ const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
           <NavigationMenu className="mx-auto max-w-none justify-between py-4">
             <NavigationMenuList>
               {/* Logo */}
-              <Link href="/" className="mr-8">
-                <NavigationMenuItem>
-                  <NavigationMenuLink>
+              <NavigationMenuItem>
+                <NavigationMenuLink asChild>
+                  <Link href="/" className="mr-8">
                     <Image
-                      src="/images/logo.png"
+                      src="/images/logo.webp"
                       alt="logo"
                       width={100}
                       height={60}
                       className="transition-transform duration-200 hover:scale-105"
                     />
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </Link>
+                  </Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
 
               {/* About Dropdown */}
               <NavigationMenuItem>
@@ -191,24 +191,22 @@ const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
             {/* Right Side Navigation */}
             <NavigationMenuList className="space-x-4">
               <NavigationMenuItem>
-                <Link href="/admission">
-                  <Button
-                    variant="default"
-                    className="h-10 px-6 transition-transform duration-200 hover:scale-105"
-                  >
-                    Enrollment
-                  </Button>
-                </Link>
+                <Button
+                  variant="default"
+                  className="h-10 px-6 transition-transform duration-200 hover:scale-105"
+                  asChild
+                >
+                  <Link href="/admission">Enrollment</Link>
+                </Button>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/contact">
-                  <Button
-                    variant="secondary"
-                    className="h-10 px-6 transition-transform duration-200 hover:scale-105"
-                  >
-                    Contact Us
-                  </Button>
-                </Link>
+                <Button
+                  variant="secondary"
+                  className="h-10 px-6 transition-transform duration-200 hover:scale-105"
+                  asChild
+                >
+                  <Link href="/contact">Contact Us</Link>
+                </Button>
               </NavigationMenuItem>
 
               {user ? (
@@ -217,14 +215,13 @@ const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
                 </NavigationMenuItem>
               ) : (
                 <NavigationMenuItem>
-                  <Link href="/user/login">
-                    <Button
-                      variant="ghost"
-                      className="h-10 px-6 transition-colors hover:bg-primary/5"
-                    >
-                      Sign In
-                    </Button>
-                  </Link>
+                  <Button
+                    variant="ghost"
+                    className="h-10 px-6 transition-colors hover:bg-primary/5"
+                    asChild
+                  >
+                    <Link href="/user/login">Sign In</Link>
+                  </Button>
                 </NavigationMenuItem>
               )}
             </NavigationMenuList>
