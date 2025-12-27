@@ -18,6 +18,8 @@ const eslintConfig = [
       'cypress/**',
       '.next',
       'cypress.config.ts',
+      'bin/**',
+      'scripts/**',
     ],
   },
   ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
