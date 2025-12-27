@@ -1,0 +1,69 @@
+const basePath = process.env.NEXT_PUBLIC_API_BASEPATH;
+export const horacePath =
+  process.env.NEXT_PUBLIC_HORACE || 'http://localhost:8000';
+// let MONGO_URI = process.env.MONGO_URI!;
+
+const authKey = process.env.NEXT_PUBLIC_APIKEY;
+export const auth = {
+  headers: { Authorization: `Basic ${authKey}` },
+};
+export const mixedAuth = {
+  headers: {
+    Authorization: `Basic ${authKey}`,
+    'Content-Type': 'application/json',
+  },
+};
+export const cookieAuth = {
+  method: 'GET',
+  headers: {
+    accept: '*/*',
+  },
+  credentials: 'include',
+};
+export const PostSettings = <T>(obj: T) => {
+  return {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${authKey}`,
+    },
+    body: JSON.stringify(obj),
+  };
+};
+export const DeleteSettings = <T>(obj: T) => {
+  return {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${authKey}`,
+    },
+    body: JSON.stringify(obj),
+  };
+};
+export const PutSettings = <T>(obj: T) => {
+  return {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${authKey}`,
+    },
+    body: JSON.stringify(obj),
+  };
+};
+
+export const PatchSettings = <T>(obj: T) => {
+  return {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${authKey}`,
+    },
+    body: JSON.stringify(obj),
+  };
+};
+
+export { basePath };

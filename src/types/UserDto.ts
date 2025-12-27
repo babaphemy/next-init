@@ -1,0 +1,25 @@
+export type UserDto = {
+  firstname?: string;
+  lastname?: string;
+  country?: string;
+  password?: string;
+  bio?: string;
+  organizationId?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  phone?: string;
+  email: string;
+  updatedOn?: string;
+  modifiedOn?: string;
+  createdOn?: string;
+  token?: string;
+  dp?: string;
+  status?: boolean;
+  role: string;
+  message?: string;
+  rating?: number;
+  reviews?: Array<string>;
+  dateOfBirth: string;
+};
