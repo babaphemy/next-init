@@ -40,7 +40,7 @@ describe('Home page', () => {
 
   describe("What's included", () => {
     it('renders features section with checklist items', () => {
-      cy.contains("What's included").should('be.visible');
+      cy.contains(/What.s included/).should('be.visible');
       cy.contains('Next.js app router').should('be.visible');
       cy.contains('Authentication').should('be.visible');
       cy.contains('Responsive layout').should('be.visible');
