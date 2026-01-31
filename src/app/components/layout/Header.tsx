@@ -150,7 +150,12 @@ const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
             {/* Mobile menu trigger - optional; for now we keep nav visible via scroll */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon" aria-label="Open menu">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Open menu"
+                  data-testid="mobile-menu-trigger"
+                >
                   <Menu className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>

@@ -36,8 +36,12 @@ describe('Navigation and layout', () => {
 
     it('opens mobile menu and navigates on small viewport', () => {
       cy.viewport(375, 667);
-      cy.get('button[aria-label="Open menu"]').click();
-      cy.contains('Enrollment').click();
+      cy.get('header').should('be.visible');
+      cy.getByTestId('mobile-menu-trigger')
+        .scrollIntoView()
+        .should('be.visible')
+        .click();
+      cy.contains('a', 'Enrollment').click();
       cy.url().should('include', '/admission');
     });
   });
