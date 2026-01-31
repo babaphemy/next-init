@@ -1,14 +1,8 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,34 +13,10 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import {
-  Phone,
-  Mail,
-  Clock,
-  MapPin,
-  LogOut,
-  User,
-  Settings,
-  BookOpen,
-} from 'lucide-react';
+import { LogOut, User, Settings, BookOpen, Menu } from 'lucide-react';
 import { AppData } from '@/app/data';
-
-import { ReactNode } from 'react';
 import { AppUser, HeaderProps } from '@/app/types';
 
-interface NavLinkProps {
-  href: string;
-  children: ReactNode;
-}
-
-const NavLink = ({ href, children }: NavLinkProps) => (
-  <Link
-    href={href}
-    className="block p-2 hover:bg-primary/5 rounded-md transition-colors duration-200 text-sm"
-  >
-    {children}
-  </Link>
-);
 const UserMenu = ({
   user,
   onSignOut,
@@ -55,10 +25,10 @@ const UserMenu = ({
   onSignOut?: () => void;
 }) => (
   <DropdownMenu>
-    <DropdownMenuTrigger className="focus:outline-none">
-      <Avatar className="h-8 w-8 hover:ring-2 hover:ring-primary/20 transition-all">
-        <AvatarImage src={user?.image} />
-        <AvatarFallback className="bg-primary/10">
+    <DropdownMenuTrigger className="focus:outline-none rounded-full">
+      <Avatar className="h-8 w-8 border border-border hover:ring-2 hover:ring-ring/20 transition-all">
+        <AvatarImage src={user?.image} alt="" />
+        <AvatarFallback className="bg-muted text-muted-foreground text-sm">
           {user.firstname?.charAt(0).toUpperCase() ||
             user.email?.charAt(0).toUpperCase()}
         </AvatarFallback>
@@ -66,166 +36,137 @@ const UserMenu = ({
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end" className="w-56">
       <DropdownMenuLabel>
-        <div className="flex flex-col space-y-1">
-          <p className="text-sm font-medium leading-none">{user.firstname}</p>
-          <p className="text-xs leading-none text-muted-foreground">
-            {user.email}
-          </p>
+        <div className="flex flex-col gap-0.5">
+          <p className="text-sm font-medium">{user.firstname}</p>
+          <p className="text-xs text-muted-foreground truncate">{user.email}</p>
         </div>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuItem>
-        <User className="w-4 h-4 mr-2" />
-        <Link href="/profile">Profile</Link>
+      <DropdownMenuItem asChild>
+        <Link href="/profile" className="flex items-center gap-2">
+          <User className="h-4 w-4" />
+          Profile
+        </Link>
       </DropdownMenuItem>
-      <DropdownMenuItem>
-        <BookOpen className="w-4 h-4 mr-2" />
-        <Link href="/my-applications">My Applications</Link>
+      <DropdownMenuItem asChild>
+        <Link href="/my-applications" className="flex items-center gap-2">
+          <BookOpen className="h-4 w-4" />
+          My applications
+        </Link>
       </DropdownMenuItem>
-      <DropdownMenuItem>
-        <Settings className="w-4 h-4 mr-2" />
-        <Link href="/settings">Settings</Link>
+      <DropdownMenuItem asChild>
+        <Link href="/settings" className="flex items-center gap-2">
+          <Settings className="h-4 w-4" />
+          Settings
+        </Link>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuItem
-        className="text-red-600 focus:text-red-600"
+        className="text-destructive focus:text-destructive"
         onClick={onSignOut}
       >
-        <LogOut className="w-4 h-4 mr-2" />
+        <LogOut className="h-4 w-4 mr-2" />
         Sign out
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
 );
 
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
 const Header: React.FC<HeaderProps> = ({ user, onSignOut }) => {
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-primary/5 border-b">
-        <div className="max-w-screen-xl mx-auto px-4 py-2">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center text-muted-foreground">
-                <Clock className="h-4 w-4 mr-2" />
-                <span>{AppData.openingHours}</span>
-              </div>
-              <div className="flex items-center text-muted-foreground">
-                <MapPin className="h-4 w-4 mr-2" />
-                <span>{AppData.address}</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <a
-                href={`mailto:${AppData.adminEmail[0]}`}
-                className="flex items-center text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Mail className="h-4 w-4 mr-2" />
-                <span>{AppData.adminEmail[0]}</span>
-              </a>
-              <a
-                href={`tel:${AppData.phone[0]}`}
-                className="flex items-center text-muted-foreground hover:text-primary transition-colors"
-              >
-                <Phone className="h-4 w-4 mr-2" />
-                <span>{AppData.phone[0]}</span>
-              </a>
-            </div>
+      {/* Top bar - minimal */}
+      <div className="border-b border-border bg-muted/50">
+        <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm text-muted-foreground">
+          <span>{AppData.openingHours}</span>
+          <div className="flex items-center gap-6">
+            <a
+              href={`mailto:${AppData.adminEmail[0]}`}
+              className="hover:text-foreground transition-colors"
+            >
+              {AppData.adminEmail[0]}
+            </a>
+            <a
+              href={`tel:${AppData.phone[0].replace(/\s/g, '')}`}
+              className="hover:text-foreground transition-colors"
+            >
+              {AppData.phone[0]}
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <header className="border-b bg-background/95 backdrop-blur sticky top-0 z-50">
-        <div className="max-w-screen-xl mx-auto px-4">
-          <NavigationMenu className="mx-auto max-w-none justify-between py-4">
-            <NavigationMenuList>
-              {/* Logo */}
-              <NavigationMenuItem>
-                <NavigationMenuLink asChild>
-                  <Link href="/" className="mr-8">
-                    <Image
-                      src="/images/logo.webp"
-                      alt="logo"
-                      width={100}
-                      height={60}
-                      className="transition-transform duration-200 hover:scale-105"
-                    />
-                  </Link>
-                </NavigationMenuLink>
-              </NavigationMenuItem>
+      {/* Main nav */}
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-foreground no-underline"
+            aria-label="Home"
+          >
+            <Image
+              src="/images/logo.webp"
+              alt=""
+              width={100}
+              height={40}
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
 
-              {/* About Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="h-10 text-base">
-                  About
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="w-[240px] p-3">
-                    <div className="space-y-1">
-                      <NavLink href="/history">Our History</NavLink>
-                      <NavLink href="/mission">Mission & Values</NavLink>
-                      <NavLink href="/staff">Staff Directory</NavLink>
-                    </div>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+            {navLinks.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
 
-              {/* Academics Dropdown */}
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="h-10 text-base">
-                  Academics
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="w-[240px] p-3">
-                    <div className="space-y-1">
-                      <NavLink href="/programs">Programs</NavLink>
-                      <NavLink href="/curriculum">Curriculum</NavLink>
-                      <NavLink href="/schedule">Schedule</NavLink>
-                    </div>
-                  </div>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-
-            {/* Right Side Navigation */}
-            <NavigationMenuList className="space-x-4">
-              <NavigationMenuItem>
-                <Button
-                  variant="default"
-                  className="h-10 px-6 transition-transform duration-200 hover:scale-105"
-                  asChild
-                >
+          <div className="flex items-center gap-2">
+            <Button
+              variant="default"
+              size="sm"
+              className="hidden sm:inline-flex"
+              asChild
+            >
+              <Link href="/admission">Enrollment</Link>
+            </Button>
+            {user ? (
+              <UserMenu user={user} onSignOut={onSignOut} />
+            ) : (
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/user/login">Sign in</Link>
+              </Button>
+            )}
+            {/* Mobile menu trigger - optional; for now we keep nav visible via scroll */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild className="md:hidden">
+                <Button variant="ghost" size="icon" aria-label="Open menu">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                {navLinks.map(({ href, label }) => (
+                  <DropdownMenuItem key={href} asChild>
+                    <Link href={href}>{label}</Link>
+                  </DropdownMenuItem>
+                ))}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
                   <Link href="/admission">Enrollment</Link>
-                </Button>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <Button
-                  variant="secondary"
-                  className="h-10 px-6 transition-transform duration-200 hover:scale-105"
-                  asChild
-                >
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
-              </NavigationMenuItem>
-
-              {user ? (
-                <NavigationMenuItem>
-                  <UserMenu user={user} onSignOut={onSignOut} />
-                </NavigationMenuItem>
-              ) : (
-                <NavigationMenuItem>
-                  <Button
-                    variant="ghost"
-                    className="h-10 px-6 transition-colors hover:bg-primary/5"
-                    asChild
-                  >
-                    <Link href="/user/login">Sign In</Link>
-                  </Button>
-                </NavigationMenuItem>
-              )}
-            </NavigationMenuList>
-          </NavigationMenu>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </header>
     </>

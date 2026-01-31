@@ -8,9 +8,9 @@ import { AppData } from '@/app/data';
 const Gmap = () => {
   return (
     <div className="space-y-8 mt-8">
-      <Card className="overflow-hidden shadow-lg border-none">
-        <CardHeader className="bg-primary/5 border-b">
-          <CardTitle className="text-2xl font-bold">Visit Us</CardTitle>
+      <Card className="overflow-hidden border border-border shadow-sm">
+        <CardHeader className="border-b border-border bg-muted/50">
+          <CardTitle className="text-lg font-semibold">Visit us</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           {/* Address Section */}
@@ -74,8 +74,8 @@ const Gmap = () => {
         </CardContent>
       </Card>
 
-      {/* Map Card */}
-      <Card className="overflow-hidden shadow-lg border-none">
+      {/* Map */}
+      <Card className="overflow-hidden border border-border shadow-sm">
         <iframe
           src={AppData.googleMap}
           className="w-full h-[400px] border-0"

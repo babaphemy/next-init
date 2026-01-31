@@ -15,17 +15,17 @@ const ContactForm = () => {
 
   return (
     <main className="flex-grow max-w-lg mx-auto py-12">
-      <Card className="overflow-hidden border-none shadow-lg">
-        <CardHeader className="bg-primary text-primary-foreground pb-8">
-          <CardTitle className="text-2xl font-bold text-center">
-            Contact Us
+      <Card className="overflow-hidden border border-border shadow-sm">
+        <CardHeader className="border-b border-border bg-muted/50 pb-6">
+          <CardTitle className="text-xl font-semibold text-center">
+            Send a message
           </CardTitle>
-          <p className="text-sm text-primary-foreground/80 text-center mt-2">
+          <p className="text-sm text-muted-foreground text-center mt-1">
             {AppData.contactForm.message}
           </p>
         </CardHeader>
 
-        <CardContent className="p-8 -mt-4 bg-background rounded-t-xl relative">
+        <CardContent className="p-6 md:p-8 relative">
           <form
             ref={formRef}
             onSubmit={handleSubmit}
@@ -102,7 +102,7 @@ const ContactForm = () => {
 
             <Button
               type="submit"
-              className="w-full rounded-lg py-6 text-base font-medium transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+              className="w-full py-6 text-sm font-medium flex items-center justify-center gap-2"
             >
               Send Message
               <Send className="w-4 h-4" />

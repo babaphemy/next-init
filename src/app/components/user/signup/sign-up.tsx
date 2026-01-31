@@ -252,7 +252,11 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
       </div>
 
       <div className="grid gap-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid gap-4"
+          noValidate
+        >
           <div className="grid gap-2">
             <Label htmlFor="firstname">First Name</Label>
             <Controller

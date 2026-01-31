@@ -131,6 +131,7 @@ function ResetForm({ className, ...props }: ResetFormProps) {
         <form
           onSubmit={handleResetSubmit(onResetSubmit)}
           className="grid gap-4"
+          noValidate
         >
           <div className="grid gap-2">
             <Label htmlFor="password">New Password</Label>
@@ -247,6 +248,7 @@ function ResetForm({ className, ...props }: ResetFormProps) {
         <form
           onSubmit={handleForgotSubmit(onForgotSubmit)}
           className="grid gap-4"
+          noValidate
         >
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>

@@ -1,0 +1,25 @@
+{
+  "valid": {
+    "email": "test@example.com",
+    "password": "validpass123",
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "confirmPassword": "validpass123"
+  },
+  "invalid": {
+    "emptyEmail": "",
+    "emptyPassword": "",
+    "invalidEmail": "not-an-email",
+    "shortPassword": "abc",
+    "mismatchPassword": "otherpass456"
+  },
+  "edgeCases": {
+    "emailWhitespace": "  test@example.com  ",
+    "emailNoDomain": "user@",
+    "emailDoubleAt": "user@@example.com",
+    "passwordTooShortLogin": "123",
+    "passwordMinLength": "1234",
+    "firstnameSingleChar": "J",
+    "lastnameSingleChar": "D"
+  }
+}

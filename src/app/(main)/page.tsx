@@ -1,112 +1,90 @@
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Check } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { AppData } from '@/app/data';
 
-export default function ReachAILanding() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
-        <div className="container mx-auto px-4 py-16 md:py-24">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="md:w-1/2 space-y-6">
-              <Badge className="bg-blue-500/20 text-blue-100 hover:bg-blue-500/30 border-none px-3 py-1">
-                Just Launched
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                Build Your Website in{' '}
-                <span className="text-blue-300">Seconds</span>, Not Months
-              </h1>
-              <p className="text-lg text-blue-100 md:pr-8">
-                ReachAI uses advanced AI to generate stunning,
-                conversion-optimized websites instantly. No coding, no design
-                skills, no waiting.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  className="bg-white text-blue-700 hover:bg-blue-50"
-                >
-                  Get Started Free
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-blue-700/20"
-                >
-                  Watch Demo
-                </Button>
-              </div>
-            </div>
-            <div className="md:w-1/2 mt-8 md:mt-0">
-              <div className="relative">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg blur-sm opacity-75"></div>
-                <div className="relative bg-gray-900 rounded-lg overflow-hidden shadow-2xl border border-blue-400/30">
-                  <Image
-                    src="/api/placeholder/800/500"
-                    alt="ReachAI Dashboard Preview"
-                    className="w-full h-auto"
-                    width={800}
-                    height={500}
-                  />
-                </div>
-              </div>
+    <div className="flex flex-col">
+      {/* Hero */}
+      <section className="relative border-b bg-muted/30">
+        <div className="container mx-auto px-4 py-20 md:py-28 lg:py-32">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+              {AppData.name}
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+              Quality learning, built for growth
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground md:text-xl">
+              A modern foundation for education and training. Customize this
+              template to launch your courses, programs, or institution.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button size="lg" asChild className="min-w-[160px]">
+                <Link href="/contact">Get in touch</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="min-w-[160px]"
+              >
+                <Link href="/about">About us</Link>
+              </Button>
             </div>
           </div>
         </div>
-      </header>
-      <section className="py-16 bg-gray-50">
+      </section>
+
+      {/* How it works */}
+      <section className="border-b bg-background py-20 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              How ReachAI Works
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-semibold text-foreground md:text-3xl">
+              Simple, focused structure
             </h2>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Generate a complete, customized website in three simple steps
+            <p className="mt-3 text-muted-foreground">
+              Three clear steps to get you from idea to launch
             </p>
           </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="mx-auto mt-16 grid max-w-4xl gap-8 md:grid-cols-3">
             {[
               {
                 step: '1',
-                title: 'Describe Your Business',
+                title: 'Define your goals',
                 description:
-                  'Tell us about your business, goals, and target audience in plain language.',
+                  'Clarify your audience, outcomes, and how you want to deliver content.',
               },
               {
                 step: '2',
-                title: 'AI Generates Your Site',
+                title: 'Configure the template',
                 description:
-                  'Our AI creates a fully functional website with optimized copy, images, and structure.',
+                  'Use this codebase as a starting point. Customize copy, routes, and branding.',
               },
               {
                 step: '3',
-                title: 'Publish & Customize',
+                title: 'Launch and iterate',
                 description:
-                  'Go live instantly or fine-tune any element to make it perfectly yours.',
+                  'Go live and improve over time with feedback and analytics.',
               },
-            ].map((item, index) => (
+            ].map((item) => (
               <Card
-                key={index}
-                className="relative border-none shadow-lg bg-white"
+                key={item.step}
+                className="border-border bg-card shadow-sm transition-shadow hover:shadow-md"
               >
-                <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-xl">
-                  {item.step}
-                </div>
-                <CardHeader className="pt-8">
-                  <CardTitle>{item.title}</CardTitle>
+                <CardHeader className="pb-2">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-sm font-medium text-primary-foreground">
+                    {item.step}
+                  </span>
+                  <CardTitle className="text-lg">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">{item.description}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {item.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -114,208 +92,139 @@ export default function ReachAILanding() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-white">
+      {/* Features */}
+      <section className="border-b bg-muted/30 py-20 md:py-24">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Everything You Need
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-semibold text-foreground md:text-3xl">
+              What’s included
             </h2>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Powerful features that make ReachAI the smartest way to create
-              your web presence
+            <p className="mt-3 text-muted-foreground">
+              Everything you need to run a professional site
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="mx-auto mt-16 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                title: 'AI-Driven Content',
-                description:
-                  'Automatically generate SEO-optimized copy that converts visitors to customers.',
+                title: 'Next.js app router',
+                desc: 'File-based routing and layouts.',
               },
               {
-                title: 'Responsive Design',
-                description:
-                  'Every site looks perfect on all devices from mobile phones to desktop computers.',
+                title: 'Authentication',
+                desc: 'NextAuth integration ready to configure.',
               },
               {
-                title: 'Built-in SEO',
-                description:
-                  'Rank higher on Google with our search engine optimization best practices.',
+                title: 'Responsive layout',
+                desc: 'Works on mobile, tablet, and desktop.',
               },
               {
-                title: 'Analytics Dashboard',
-                description:
-                  'Track visitors, engagement, and conversions with easy-to-understand metrics.',
+                title: 'Contact & forms',
+                desc: 'Contact page and form components.',
               },
               {
-                title: 'Custom Domain',
-                description:
-                  'Connect your own domain or purchase one directly through our platform.',
+                title: 'Dashboard shell',
+                desc: 'Protected dashboard layout and roles.',
               },
               {
-                title: 'Regular Updates',
-                description:
-                  'AI continuously improves your site based on performance data and trends.',
+                title: 'Design system',
+                desc: 'Consistent typography, colors, and components.',
               },
-            ].map((feature, index) => (
+            ].map((feature) => (
               <Card
-                key={index}
-                className="border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+                key={feature.title}
+                className="border-border bg-card shadow-sm"
               >
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Check className="h-5 w-5 text-green-500" />
+                <CardHeader className="pb-2">
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <Check className="h-4 w-4 shrink-0 text-foreground" />
                     {feature.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              Simple, Transparent Pricing
-            </h2>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Choose the plan that&apos;s right for your business
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                name: 'Starter',
-                price: '$19',
-                description:
-                  'Perfect for solo entrepreneurs and small businesses',
-                features: [
-                  '1 website',
-                  'AI content generation',
-                  'Basic analytics',
-                  'Custom domain',
-                  'Email support',
-                ],
-              },
-              {
-                name: 'Professional',
-                price: '$49',
-                description: 'Ideal for growing businesses with more needs',
-                features: [
-                  '3 websites',
-                  'Advanced AI content',
-                  'Full analytics suite',
-                  'Custom domains',
-                  'Priority support',
-                  'A/B testing',
-                ],
-                highlighted: true,
-              },
-              {
-                name: 'Enterprise',
-                price: '$99',
-                description: 'For businesses with advanced requirements',
-                features: [
-                  '10 websites',
-                  'Premium AI content',
-                  'Advanced analytics',
-                  'Custom domains',
-                  '24/7 phone support',
-                  'A/B testing',
-                  'White labeling',
-                ],
-              },
-            ].map((plan, index) => (
-              <Card
-                key={index}
-                className={`border ${plan.highlighted ? 'border-blue-500 shadow-xl shadow-blue-100' : 'border-gray-200 shadow-sm'}`}
-              >
-                <CardHeader>
-                  {plan.highlighted && (
-                    <Badge className="w-fit mb-2">Most Popular</Badge>
-                  )}
-                  <CardTitle>{plan.name}</CardTitle>
-                  <div className="flex items-baseline">
-                    <span className="text-3xl font-bold">{plan.price}</span>
-                    <span className="text-gray-500 ml-1">/month</span>
-                  </div>
-                  <CardDescription>{plan.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2">
-                        <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Button
-                    className={`w-full ${plan.highlighted ? 'bg-blue-600 hover:bg-blue-700' : ''}`}
-                    variant={plan.highlighted ? 'default' : 'outline'}
-                  >
-                    Get Started
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              What Our Customers Say
-            </h2>
-            <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-              Join thousands of satisfied businesses who have transformed their
-              online presence
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                quote:
-                  'ReachAI built me a better website in 2 minutes than my previous developer did in 2 months.',
-                author: 'Sarah Johnson',
-                company: 'Bloom Boutique',
-              },
-              {
-                quote:
-                  'Our conversion rate increased by 43% after switching to a ReachAI-generated website.',
-                author: 'Michael Chen',
-                company: 'TechStart Solutions',
-              },
-              {
-                quote:
-                  'I was skeptical about AI-generated websites until I tried ReachAI. The results speak for themselves.',
-                author: 'Emma Rodriguez',
-                company: 'Wellness Studio',
-              },
-            ].map((testimonial, index) => (
-              <Card key={index} className="border border-gray-200 shadow-sm">
-                <CardContent className="pt-6">
-                  <p className="text-gray-700 italic mb-4">
-                    &quot;{testimonial.quote}&quot;
+                  <p className="text-sm text-muted-foreground">
+                    {feature.desc}
                   </p>
-                  <div>
-                    <p className="font-medium">{testimonial.author}</p>
-                    <p className="text-sm text-gray-500">
-                      {testimonial.company}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About teaser + CTA */}
+      <section className="border-b bg-background py-20 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
+            <div>
+              <h2 className="text-2xl font-semibold text-foreground md:text-3xl">
+                Built for educators and teams
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                {AppData.footer.message1}
+              </p>
+              <p className="mt-4 text-muted-foreground">
+                {AppData.footer.message2}
+              </p>
+              <Button variant="outline" className="mt-6" asChild>
+                <Link href="/about">Learn more</Link>
+              </Button>
+            </div>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border bg-muted">
+              <Image
+                src="/images/about.png"
+                alt="About"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="border-b bg-muted/30 py-20 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-semibold text-foreground md:text-3xl">
+              Trusted by teams
+            </h2>
+            <p className="mt-3 text-muted-foreground">
+              A flexible base for courses, academies, and training
+            </p>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-4xl gap-8 md:grid-cols-3">
+            {[
+              {
+                quote:
+                  'Clean structure and easy to customize. We had our site live in a week.',
+                author: 'Sarah J.',
+                role: 'Learning lead',
+              },
+              {
+                quote:
+                  'The auth and dashboard setup saved us a lot of time. Solid foundation.',
+                author: 'Michael C.',
+                role: 'Tech lead',
+              },
+              {
+                quote:
+                  'Professional look out of the box. We only tweaked copy and colors.',
+                author: 'Emma R.',
+                role: 'Product owner',
+              },
+            ].map((t) => (
+              <Card key={t.author} className="border-border bg-card shadow-sm">
+                <CardContent className="pt-6">
+                  <p className="text-sm text-muted-foreground">
+                    &quot;{t.quote}&quot;
+                  </p>
+                  <div className="mt-4">
+                    <p className="text-sm font-medium text-foreground">
+                      {t.author}
                     </p>
+                    <p className="text-xs text-muted-foreground">{t.role}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -324,28 +233,32 @@ export default function ReachAILanding() {
         </div>
       </section>
 
-      <section className="bg-blue-600 text-white py-16">
+      {/* Final CTA */}
+      <section className="bg-primary text-primary-foreground py-20 md:py-24">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
-            Ready to Transform Your Online Presence?
+          <h2 className="text-2xl font-semibold md:text-3xl">
+            Ready to get started?
           </h2>
-          <p className="text-blue-100 max-w-2xl mx-auto mb-8">
-            Join the thousands of businesses saving time and money with
-            ReachAI&apos;s instant website generation.
+          <p className="mx-auto mt-3 max-w-xl text-primary-foreground/90">
+            Reach out with questions or start customizing this template for your
+            project.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button
               size="lg"
-              className="bg-white text-blue-700 hover:bg-blue-50"
+              variant="secondary"
+              className="min-w-[160px] bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              asChild
             >
-              Start Free Trial
+              <Link href="/contact">Contact us</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-blue-700/20"
+              className="min-w-[160px] border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              asChild
             >
-              Schedule Demo
+              <Link href="/user/register">Create account</Link>
             </Button>
           </div>
         </div>

@@ -1,0 +1,17 @@
+{
+  "valid": {
+    "name": "Test User",
+    "email": "contact@example.com",
+    "phone": "+1 234 567 8900",
+    "subject": "General inquiry",
+    "message": "This is a test message for the contact form."
+  },
+  "edgeCases": {
+    "emptyFields": {},
+    "nameOnly": { "name": "John" },
+    "invalidEmail": "not-valid-email",
+    "specialChars": "O'Brien <test> & \"quotes\"",
+    "unicode": "日本語 テスト",
+    "xssAttempt": "<script>alert('xss')</script>"
+  }
+}

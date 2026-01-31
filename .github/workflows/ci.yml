@@ -1,4 +1,4 @@
-name: Run Cypress E2E Tests
+name: CI
 
 on:
   pull_request:
@@ -7,29 +7,62 @@ on:
       - feature/landing
 
 jobs:
-  cypress-e2e-tests:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out the code
-        uses: actions/checkout@v3
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Lint
         run: npm run lint
 
+  cypress-e2e:
+    name: Cypress E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Cypress binary
+        run: npx cypress install
+
       - name: Run Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           browser: chrome
           start: npm run dev
-          wait-on: "http://localhost:3000" # Ensures server is running
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
 
-      - name: Archive test results
+      - name: Upload Cypress screenshots
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: cypress-results
+          name: cypress-screenshots
           path: cypress/screenshots
+
+      - name: Upload Cypress videos
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-videos
+          path: cypress/videos

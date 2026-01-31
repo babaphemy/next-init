@@ -106,7 +106,11 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
 
       <div className="grid gap-6">
         {/* Form section - only email/password fields */}
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid gap-4"
+          noValidate
+        >
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Controller
