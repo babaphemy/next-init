@@ -41,7 +41,12 @@ describe('Navigation and layout', () => {
         .scrollIntoView()
         .should('be.visible')
         .click();
-      cy.contains('a', 'Enrollment').click();
+      // Click Enrollment inside the open dropdown (desktop Enrollment link is hidden on mobile)
+      cy.get('[role="menu"]')
+        .should('be.visible')
+        .within(() => {
+          cy.contains('a', 'Enrollment').click();
+        });
       cy.url().should('include', '/admission');
     });
   });
